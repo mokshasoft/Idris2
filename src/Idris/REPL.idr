@@ -1,7 +1,7 @@
 module Idris.REPL
 
 import Compiler.Scheme.Chez
--- import Compiler.Scheme.Chicken
+import Compiler.Scheme.Chicken
 import Compiler.Scheme.Racket
 import Compiler.Common
 
@@ -238,8 +238,7 @@ findCG
     = do defs <- get Ctxt
          case codegen (session (options defs)) of
               Chez => pure codegenChez
-              Chicken => throw (InternalError "Chicken CG not available")
-                         -- pure codegenChicken
+              Chicken => pure codegenChicken
               Racket => pure codegenRacket
 
 anyAt : (FC -> Bool) -> FC -> a -> Bool
