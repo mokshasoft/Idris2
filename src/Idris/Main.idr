@@ -46,7 +46,7 @@ updatePaths
     = do bprefix <- coreLift $ getEnv "IDRIS2_PREFIX"
          case bprefix of
               Just p => setPrefix p
-              Nothing => setPrefix yprefix
+              Nothing => setPrefix Main.yprefix
          bpath <- coreLift $ getEnv "IDRIS2_PATH"
          case bpath of
               Just path => do traverse addExtraDir (map trim (split (==pathSep) path))
@@ -208,7 +208,7 @@ quitOpts (Help :: _)
     = do putStrLn usage
          pure False
 quitOpts (ShowPrefix :: _)
-    = do putStrLn yprefix
+    = do putStrLn Main.yprefix
          pure False
 quitOpts (_ :: opts) = quitOpts opts
 
