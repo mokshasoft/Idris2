@@ -91,7 +91,7 @@ compileExpr c execDir tm outfile
          let outn = tmp ++ ".scm"
          compileToSCM c tm outn
          csc <- coreLift findCSC
-         ok <- coreLift $ system (csc ++ " " ++ outn ++ " -o " ++ outfile)
+         ok <- coreLift $ system (csc ++ " -k " ++ outn ++ " -o " ++ outfile)
          if ok == 0
             then pure (Just outfile)
             else pure Nothing
