@@ -32,7 +32,7 @@ findCSC =
 
 schHeader : List String -> String
 schHeader ds
-  = "(use numbers)\n" ++ unlines ds ++ "\n" ++
+  = unlines ds ++ "\n" ++
     "(let ()\n"
 
 schFooter : String
