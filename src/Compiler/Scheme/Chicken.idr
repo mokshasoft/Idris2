@@ -59,14 +59,13 @@ showChickenString (c ::cs) = (showChickenChar c) . showChickenString cs
 chickenString : String -> String
 chickenString cs = strCons '"' (showChickenString (unpack cs) "\"")
 
-mutual
-  chickenPrim : Int -> ExtPrim -> List NamedCExp -> Core String
-  chickenPrim i CCall [ret, fn, args, world]
-      = throw (InternalError ("Can't compile C FFI calls to Chicken Scheme yet"))
-  chickenPrim i SysCodegen []
-      = pure $ "\"chicken\""
-  chickenPrim i prim args
-      = schExtCommon chickenPrim chickenString i prim args
+chickenPrim : Int -> ExtPrim -> List NamedCExp -> Core String
+chickenPrim i CCall [ret, fn, args, world]
+    = throw (InternalError ("Can't compile C FFI calls to Chicken Scheme yet"))
+chickenPrim i SysCodegen []
+    = pure $ "\"chicken\""
+chickenPrim i prim args
+    = schExtCommon chickenPrim chickenString i prim args
 
 compileToSCM : Ref Ctxt Defs ->
                ClosedTerm -> (outfile : String) -> Core ()
