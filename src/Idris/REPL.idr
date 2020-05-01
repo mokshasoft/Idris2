@@ -240,6 +240,7 @@ findCG
               Chez => pure codegenChez
               Chicken => pure codegenChicken
               Racket => pure codegenRacket
+              ChickenC => pure codegenChickenC
 
 anyAt : (FC -> Bool) -> FC -> a -> Bool
 anyAt p loc y = p loc

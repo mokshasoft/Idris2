@@ -111,4 +111,6 @@ export
 codegenChicken : Codegen
 codegenChicken = MkCG compileExpr executeExpr
 
-
+export
+codegenChickenC : Codegen
+codegenChickenC = MkCG compileExpr executeExpr
