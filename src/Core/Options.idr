@@ -51,7 +51,7 @@ availableCGs =
   [ ("chez", Chez)
   , ("chicken", Chicken)
   , ("racket", Racket)
-  , ("chickenC", ChickenC)
+  , ("chicken-c", ChickenC)
   ]
 
 export
