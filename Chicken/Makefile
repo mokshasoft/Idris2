@@ -4,3 +4,6 @@ idris: idris.idr
 
 hello: hello.scm
 	csc -k hello.scm
+
+clean:
+	rm -f idris idris.o idris.c hello hello.o hello.c 
