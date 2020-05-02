@@ -20,6 +20,10 @@ import System.Info
 
 %default covering
 
+data ChickenTarget =
+    Binary
+  | C
+
 findCSI : IO String
 findCSI =
   do env <- getEnv "CHICKEN_CSI"
@@ -90,10 +94,11 @@ compileExpr : Ref Ctxt Defs -> (execDir : String) ->
               ClosedTerm -> (outfile : String) -> Core (Maybe String)
 compileExpr c execDir tm outfile
     = do tmp <- coreLift $ tmpName
+         coreLift $ putStrLn $ "compileExpr " ++ execDir ++ " " ++ outfile
          let outn = tmp ++ ".scm"
          compileToSCM c tm outn
          csc <- coreLift findCSC
-         ok <- coreLift $ system (csc ++ " -k " ++ outn ++ " -o " ++ outfile)
+         ok <- coreLift $ system (csc ++ " -t " ++ outn ++ " -o " ++ outfile)
          if ok == 0
             then pure (Just outfile)
             else pure Nothing
