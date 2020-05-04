@@ -87,9 +87,9 @@ compileToSCM c tm outfile
          coreLift $ chmod outfile 0o755
          pure ()
 
-compileExpr : Ref Ctxt Defs -> (execDir : String) ->
+compileExpr : Bool -> Ref Ctxt Defs -> (execDir : String) ->
               ClosedTerm -> (outfile : String) -> Core (Maybe String)
-compileExpr c execDir tm outfile
+compileExpr dummy c execDir tm outfile
     = do tmp <- coreLift $ tmpName
          let outn = tmp ++ ".scm"
          compileToSCM c tm outn
@@ -110,6 +110,6 @@ executeExpr c execDir tm
 
 export
 codegenChicken : Codegen
-codegenChicken = MkCG compileExpr executeExpr
+codegenChicken = MkCG (compileExpr False) executeExpr
 
 
